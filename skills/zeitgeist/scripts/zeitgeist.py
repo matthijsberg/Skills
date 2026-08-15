@@ -517,14 +517,61 @@ class HolidayResolver:
                 if dt_end >= ref_dt:
                     return ResolvedWindow(phrase, ref_dt.isoformat(), tz_name, dt_start.isoformat(), dt_end.isoformat(), "holiday", 0.95)
 
-        # 4. Search dynamic holidays via holidays package (Pasen, Hemelvaart, Pinksteren, Nyepi, etc.)
+        # 4. Pasen, Hemelvaart, Pinksteren
+        if "pasen" in low or "easter" in low:
+            for y in years:
+                h_obj = holidays.country_holidays("NL", years=[y])
+                paas_dates = [d for d, n in h_obj.items() if "easter" in str(n).lower() or "paas" in str(n).lower()]
+                if paas_dates:
+                    d_min, d_max = min(paas_dates), max(paas_dates)
+                    dt_start = datetime(d_min.year, d_min.month, d_min.day, 0, 0, 0, tzinfo=tz)
+                    dt_end = datetime(d_max.year, d_max.month, d_max.day, 23, 59, 59, tzinfo=tz)
+                    if dt_end >= ref_dt:
+                        return ResolvedWindow(phrase, ref_dt.isoformat(), tz_name, dt_start.isoformat(), dt_end.isoformat(), "holiday", 0.95, ambiguity_note=f"Paasweekend {y}")
+
+        if "hemelvaart" in low or "ascension" in low:
+            for y in years:
+                h_obj = holidays.country_holidays("NL", years=[y])
+                hv_dates = [d for d, n in h_obj.items() if "ascension" in str(n).lower() or "hemelvaart" in str(n).lower()]
+                if hv_dates:
+                    d = hv_dates[0]
+                    dt_start = datetime(d.year, d.month, d.day, 0, 0, 0, tzinfo=tz)
+                    dt_end = datetime(d.year, d.month, d.day, 23, 59, 59, tzinfo=tz)
+                    if dt_end >= ref_dt:
+                        return ResolvedWindow(phrase, ref_dt.isoformat(), tz_name, dt_start.isoformat(), dt_end.isoformat(), "holiday", 0.95, ambiguity_note=f"Hemelvaartsdag {y}")
+
+        if "pinksteren" in low or "pentecost" in low:
+            for y in years:
+                h_obj = holidays.country_holidays("NL", years=[y])
+                p_dates = [d for d, n in h_obj.items() if "pentecost" in str(n).lower() or "pinkster" in str(n).lower()]
+                if p_dates:
+                    d_min, d_max = min(p_dates), max(p_dates)
+                    dt_start = datetime(d_min.year, d_min.month, d_min.day, 0, 0, 0, tzinfo=tz)
+                    dt_end = datetime(d_max.year, d_max.month, d_max.day, 23, 59, 59, tzinfo=tz)
+                    if dt_end >= ref_dt:
+                        return ResolvedWindow(phrase, ref_dt.isoformat(), tz_name, dt_start.isoformat(), dt_end.isoformat(), "holiday", 0.95, ambiguity_note=f"Pinksterweekend {y}")
+
+        # 5. Search dynamic holidays via holidays package (e.g. Nyepi, Idul Fitri, etc.)
+        WEEKDAY_MONTH_STOPWORDS = {
+            "maandag", "dinsdag", "woensdag", "donderdag", "vrijdag", "zaterdag", "zondag",
+            "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday",
+            "januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december",
+            "january", "february", "march", "may", "june", "july", "august", "october", "december",
+            "eerste", "tweede", "goede", "nieuw", "dag", "van", "de", "het", "in", "met", "en", "hari", "tahun", "day", "suci"
+        }
         target_country = "ID" if ("nyepi" in low or "bali" in low or "jakarta" in low) else country_code
         for y in years:
             try:
                 h_obj = holidays.country_holidays(target_country, years=[y])
                 for h_date, h_name in h_obj.items():
                     h_name_low = str(h_name).lower()
-                    if any(term in low for term in [h_name_low, h_name_low.split()[0]] if len(term) > 3):
+                    if h_name_low in low:
+                        matched = True
+                    else:
+                        words = [w for w in h_name_low.split() if w not in WEEKDAY_MONTH_STOPWORDS and len(w) > 3]
+                        matched = bool(words and any(w in low.split() for w in words))
+
+                    if matched:
                         dt_start = datetime(h_date.year, h_date.month, h_date.day, 0, 0, 0, tzinfo=tz)
                         dt_end = datetime(h_date.year, h_date.month, h_date.day, 23, 59, 59, tzinfo=tz)
                         if dt_end >= ref_dt:
@@ -593,11 +640,12 @@ class NaturalLanguageNormalizer:
         self,
         phrase: str,
         reference: Optional[datetime] = None,
-        tz_name: Optional[str] = None
+        tz_name: Optional[str] = None,
+        location: Optional[LocationCoords] = None
     ) -> ResolvedWindow:
         """
         Normalize relative temporal phrase to an ISO 8601 window.
-        100% deterministic given the reference datetime and timezone.
+        100% deterministic given the reference datetime, timezone and optional location.
         """
         tz_str = tz_name or self.default_tz
         tz = ZoneInfo(tz_str)
@@ -624,7 +672,7 @@ class NaturalLanguageNormalizer:
 
         # 0b. Check solar event-anchored phrases ("tijdens zonsondergang", "golden hour", "voor het donker", "bij zonsopgang")
         if any(s in clean_phrase for s in ["zonsondergang", "sunset", "golden hour", "gouden uur", "voor het donker", "voor donker", "before dark", "zonsopgang", "sunrise", "schemering", "dusk", "dawn"]):
-            loc = self.tz_resolver.resolve(tz_name.split("/")[-1] if "/" in tz_name else "Amsterdam", default_tz=tz_str)
+            loc = location if location is not None else self.tz_resolver.resolve(tz_name.split("/")[-1] if (tz_name and "/" in tz_name) else "Amsterdam", default_tz=tz_str)
             solar_today = self.solar_calc.compute(ref_dt, loc)
 
             if "zonsondergang" in clean_phrase or "sunset" in clean_phrase:
@@ -1258,25 +1306,80 @@ class OpenMeteoWeatherProvider:
                 cached["cache_hit"] = True
                 return WeatherSummary(**cached)
 
-            # Heuristic / archive climate summary
-            res = WeatherSummary(
-                location=asdict(location),
-                window={"start": window.start, "end": window.end},
-                horizon="clima",
-                reliability="climatology",
-                temperature_c=27.5 if "Asia" in tz_str else (18.0 if 5 <= month_num <= 9 else 3.5),
-                temp_min_c=23.0 if "Asia" in tz_str else (12.0 if 5 <= month_num <= 9 else -2.0),
-                temp_max_c=31.5 if "Asia" in tz_str else (23.0 if 5 <= month_num <= 9 else 8.0),
-                precipitation_prob=0.20 if "Asia" in tz_str and 5 <= month_num <= 9 else 0.45,
-                wind_bft=3,
-                wind_direction="O",
-                climatology_note=f"Historische klimaatnormaal voor {location.name} in {m_name}. Let op: voor datums > 30 dagen geldt altijd het [climatology] label.",
-                source="open-meteo/climate-archive",
-                fetched_at=datetime.now(timezone.utc).isoformat(),
-                cache_hit=False
-            )
-            self.cache.set(f"clima_{lat}_{lon}_{month_num}", asdict(res))
-            return res
+            # Query real Open-Meteo Historical Archive API (using recent complete reference year 2024)
+            try:
+                ref_year = 2024
+                m_start = date(ref_year, month_num, 1)
+                if month_num == 12:
+                    m_end = date(ref_year, 12, 31)
+                else:
+                    m_end = date(ref_year, month_num + 1, 1) - timedelta(days=1)
+
+                url = (
+                    f"https://archive-api.open-meteo.com/v1/archive?"
+                    f"latitude={lat}&longitude={lon}&start_date={m_start.isoformat()}&end_date={m_end.isoformat()}"
+                    f"&daily=temperature_2m_mean,temperature_2m_max,temperature_2m_min,precipitation_sum"
+                    f"&timezone={urllib.parse.quote(tz_str)}"
+                )
+                req = urllib.request.Request(url, headers={"User-Agent": "Hermes-Zeitgeist/1.2.1"})
+                with urllib.request.urlopen(req, timeout=5.0) as resp:
+                    data = json.loads(resp.read().decode("utf-8"))
+                    daily = data.get("daily", {})
+                    means = daily.get("temperature_2m_mean", [])
+                    maxs = daily.get("temperature_2m_max", [])
+                    mins = daily.get("temperature_2m_min", [])
+                    precips = daily.get("precipitation_sum", [])
+
+                    if means and maxs and mins:
+                        valid_means = [m for m in means if m is not None]
+                        valid_maxs = [m for m in maxs if m is not None]
+                        valid_mins = [m for m in mins if m is not None]
+                        valid_precips = [p for p in precips if p is not None]
+
+                        avg_mean = sum(valid_means) / len(valid_means)
+                        avg_max = sum(valid_maxs) / len(valid_maxs)
+                        avg_min = sum(valid_mins) / len(valid_mins)
+                        precip_days = sum(1 for p in valid_precips if p > 0.5)
+                        precip_prob = round(precip_days / len(valid_precips), 2) if valid_precips else 0.20
+
+                        res = WeatherSummary(
+                            location=asdict(location),
+                            window={"start": window.start, "end": window.end},
+                            horizon="clima",
+                            reliability="climatology",
+                            temperature_c=round(avg_mean, 1),
+                            temp_min_c=round(avg_min, 1),
+                            temp_max_c=round(avg_max, 1),
+                            precipitation_prob=precip_prob,
+                            wind_bft=3,
+                            wind_direction="O",
+                            climatology_note=f"Historische klimaatnormaal voor {location.name} in {m_name} (Open-Meteo Archive data).",
+                            source="open-meteo/climate-archive",
+                            fetched_at=datetime.now(timezone.utc).isoformat(),
+                            cache_hit=False
+                        )
+                        self.cache.set(f"clima_{lat}_{lon}_{month_num}", asdict(res))
+                        return res
+            except Exception as e:
+                # If API fails and no cache exists, return honest unavailable status (never fake numbers!)
+                return WeatherSummary(
+                    location=asdict(location),
+                    window={"start": window.start, "end": window.end},
+                    horizon="clima",
+                    reliability="unavailable",
+                    temperature_c=None,
+                    temp_min_c=None,
+                    temp_max_c=None,
+                    feels_like_c=None,
+                    precipitation_prob=None,
+                    precipitation_mm=None,
+                    wind_speed_kmh=None,
+                    wind_bft=None,
+                    weather_description=f"Climatology data unavailable ({e})",
+                    source="unavailable",
+                    fetched_at=datetime.now(timezone.utc).isoformat(),
+                    cache_hit=False
+                )
 
         # 2. Hourly & Daily Forecast (0 - 16 days)
         cached_forecast = self.cache.get(cache_key, ttl_seconds=900 if horizon.horizon == "micro" else 3600)
@@ -1292,7 +1395,7 @@ class OpenMeteoWeatherProvider:
                 f"&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,precipitation_sum,wind_speed_10m_max,uv_index_max,weather_code"
                 f"&forecast_days=16"
             )
-            req = urllib.request.Request(url, headers={"User-Agent": "Hermes-Zeitgeist/1.0"})
+            req = urllib.request.Request(url, headers={"User-Agent": "Hermes-Zeitgeist/1.2.1"})
             with urllib.request.urlopen(req, timeout=5.0) as resp:
                 data = json.loads(resp.read().decode("utf-8"))
 
@@ -1380,17 +1483,22 @@ class OpenMeteoWeatherProvider:
                     self.cache.set(cache_key, asdict(summary))
                     return summary
         except Exception as e:
-            # Fallback mock/cache
+            # Fallback: honest unavailable status (never fabricate fake numbers)
             return WeatherSummary(
                 location=asdict(location),
                 window={"start": window.start, "end": window.end},
                 horizon=horizon.horizon,
-                reliability=horizon.reliability,
-                temperature_c=25.0,
-                precipitation_prob=0.10,
-                wind_bft=3,
-                weather_description="Offline fallback / cache expired",
-                source=f"fallback ({e})",
+                reliability="unavailable",
+                temperature_c=None,
+                temp_min_c=None,
+                temp_max_c=None,
+                feels_like_c=None,
+                precipitation_prob=None,
+                precipitation_mm=None,
+                wind_speed_kmh=None,
+                wind_bft=None,
+                weather_description=f"Weather data unavailable ({e})",
+                source="unavailable",
                 fetched_at=datetime.now(timezone.utc).isoformat(),
                 cache_hit=False
             )
@@ -1472,8 +1580,8 @@ class Zeitgeist:
             loc = self.tz_resolver.resolve(extracted_loc, self.default_tz)
             ref_dt = ref_dt.astimezone(ZoneInfo(loc.timezone_name))
 
-        # 1. Normalize
-        window = self.normalizer.normalize(phrase, reference=ref_dt, tz_name=loc.timezone_name)
+        # 1. Normalize with exact location
+        window = self.normalizer.normalize(phrase, reference=ref_dt, tz_name=loc.timezone_name, location=loc)
 
         # 2. Classify Horizon
         horizons = self.classifier.classify(window, reference=ref_dt)

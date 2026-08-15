@@ -24,7 +24,7 @@ def test_scenario_1_ferry_gili(engine):
 
 
 def test_scenario_2_gerlos_ski_clima(engine):
-    # 2. "Kunnen we in januari skiën in Gerlos?" -> Clima, [climatology]
+    # 2. "Kunnen we in januari skiën in Gerlos?" -> Clima, [climatology] (real historical data: ~ -3.0 °C)
     ref_dt = datetime(2026, 8, 14, 9, 12, 0, tzinfo=ZoneInfo("Europe/Vienna"))
     res = engine.query("in januari", location_name="Gerlos", reference=ref_dt)
 
@@ -32,6 +32,8 @@ def test_scenario_2_gerlos_ski_clima(engine):
     assert res["primary_horizon"]["reliability"] == "climatology"
     assert res["reliability_tag"] == "[climatology]"
     assert "climatology_note" in res["weather"]
+    assert res["weather"]["temperature_c"] is not None
+    assert res["weather"]["temperature_c"] <= 0.0  # Real January alpine winter temperature!
 
 
 def test_scenario_3_crossfit_overmorgen(engine):

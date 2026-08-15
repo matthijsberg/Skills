@@ -1,7 +1,7 @@
 ---
 name: zeitgeist
 description: "Dynamic temporal awareness, atomic clock sync, relative time normalizer, horizon classifier, solar phases, and weather/climatology."
-version: 1.0.0
+version: 1.2.1
 author: Matthijs van den Berg & Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]
