@@ -1,0 +1,407 @@
+[
+  {
+    "input": "nu",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-08-14T09:12:00+02:00",
+    "expected_end": "2026-08-14T09:12:00+02:00",
+    "granularity": "instant",
+    "min_confidence": 0.95
+  },
+  {
+    "input": "vandaag",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-08-14T00:00:00+02:00",
+    "expected_end": "2026-08-14T23:59:59+02:00",
+    "granularity": "day",
+    "min_confidence": 0.95
+  },
+  {
+    "input": "vanochtend",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-08-14T06:00:00+02:00",
+    "expected_end": "2026-08-14T12:00:00+02:00",
+    "granularity": "daypart",
+    "min_confidence": 0.95
+  },
+  {
+    "input": "vanmiddag",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-08-14T12:00:00+02:00",
+    "expected_end": "2026-08-14T18:00:00+02:00",
+    "granularity": "daypart",
+    "min_confidence": 0.95
+  },
+  {
+    "input": "vanavond",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-08-14T18:00:00+02:00",
+    "expected_end": "2026-08-14T23:00:00+02:00",
+    "granularity": "daypart",
+    "min_confidence": 0.95
+  },
+  {
+    "input": "vannacht",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-08-14T23:00:00+02:00",
+    "expected_end": "2026-08-15T06:00:00+02:00",
+    "granularity": "daypart",
+    "min_confidence": 0.90
+  },
+  {
+    "input": "morgen",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-08-15T00:00:00+02:00",
+    "expected_end": "2026-08-15T23:59:59+02:00",
+    "granularity": "day",
+    "min_confidence": 0.95
+  },
+  {
+    "input": "morgenochtend",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-08-15T06:00:00+02:00",
+    "expected_end": "2026-08-15T12:00:00+02:00",
+    "granularity": "daypart",
+    "min_confidence": 0.95
+  },
+  {
+    "input": "morgenmiddag",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-08-15T12:00:00+02:00",
+    "expected_end": "2026-08-15T18:00:00+02:00",
+    "granularity": "daypart",
+    "min_confidence": 0.95
+  },
+  {
+    "input": "morgenavond",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-08-15T18:00:00+02:00",
+    "expected_end": "2026-08-15T23:00:00+02:00",
+    "granularity": "daypart",
+    "min_confidence": 0.95
+  },
+  {
+    "input": "morgennacht",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-08-15T23:00:00+02:00",
+    "expected_end": "2026-08-16T06:00:00+02:00",
+    "granularity": "daypart",
+    "min_confidence": 0.90
+  },
+  {
+    "input": "overmorgen",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-08-16T00:00:00+02:00",
+    "expected_end": "2026-08-16T23:59:59+02:00",
+    "granularity": "day",
+    "min_confidence": 0.95
+  },
+  {
+    "input": "overmorgenochtend",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-08-16T06:00:00+02:00",
+    "expected_end": "2026-08-16T12:00:00+02:00",
+    "granularity": "daypart",
+    "min_confidence": 0.95
+  },
+  {
+    "input": "overmorgenmiddag",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-08-16T12:00:00+02:00",
+    "expected_end": "2026-08-16T18:00:00+02:00",
+    "granularity": "daypart",
+    "min_confidence": 0.95
+  },
+  {
+    "input": "overmorgenavond",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-08-16T18:00:00+02:00",
+    "expected_end": "2026-08-16T23:00:00+02:00",
+    "granularity": "daypart",
+    "min_confidence": 0.95
+  },
+  {
+    "input": "morgen om 10:00",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-08-15T10:00:00+02:00",
+    "expected_end": "2026-08-15T11:00:00+02:00",
+    "granularity": "hour",
+    "min_confidence": 0.95
+  },
+  {
+    "input": "morgen van 10 tot 11 uur",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-08-15T10:00:00+02:00",
+    "expected_end": "2026-08-15T11:00:00+02:00",
+    "granularity": "hour",
+    "min_confidence": 0.95
+  },
+  {
+    "input": "morgen van 14:00 tot 17:30",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-08-15T14:00:00+02:00",
+    "expected_end": "2026-08-15T17:30:00+02:00",
+    "granularity": "custom",
+    "min_confidence": 0.95
+  },
+  {
+    "input": "gisteren",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-08-13T00:00:00+02:00",
+    "expected_end": "2026-08-13T23:59:59+02:00",
+    "granularity": "day",
+    "min_confidence": 0.95
+  },
+  {
+    "input": "eergisteren",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-08-12T00:00:00+02:00",
+    "expected_end": "2026-08-12T23:59:59+02:00",
+    "granularity": "day",
+    "min_confidence": 0.95
+  },
+  {
+    "input": "dit weekend",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-08-15T00:00:00+02:00",
+    "expected_end": "2026-08-16T23:59:59+02:00",
+    "granularity": "weekend",
+    "min_confidence": 0.95
+  },
+  {
+    "input": "komend weekend",
+    "ref": "2026-08-12T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-08-15T00:00:00+02:00",
+    "expected_end": "2026-08-16T23:59:59+02:00",
+    "granularity": "weekend",
+    "min_confidence": 0.95
+  },
+  {
+    "input": "volgend weekend",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-08-22T00:00:00+02:00",
+    "expected_end": "2026-08-23T23:59:59+02:00",
+    "granularity": "weekend",
+    "min_confidence": 0.85
+  },
+  {
+    "input": "aanstaande zaterdag",
+    "ref": "2026-08-12T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-08-15T00:00:00+02:00",
+    "expected_end": "2026-08-15T23:59:59+02:00",
+    "granularity": "day",
+    "min_confidence": 0.95
+  },
+  {
+    "input": "volgende week vrijdag",
+    "ref": "2026-08-12T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-08-21T00:00:00+02:00",
+    "expected_end": "2026-08-21T23:59:59+02:00",
+    "granularity": "day",
+    "min_confidence": 0.85
+  },
+  {
+    "input": "volgende week maandag",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-08-17T00:00:00+02:00",
+    "expected_end": "2026-08-17T23:59:59+02:00",
+    "granularity": "day",
+    "min_confidence": 0.85
+  },
+  {
+    "input": "over 3 dagen",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-08-17T00:00:00+02:00",
+    "expected_end": "2026-08-17T23:59:59+02:00",
+    "granularity": "day",
+    "min_confidence": 0.95
+  },
+  {
+    "input": "over 2 weken",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-08-28T00:00:00+02:00",
+    "expected_end": "2026-08-28T23:59:59+02:00",
+    "granularity": "day",
+    "min_confidence": 0.90
+  },
+  {
+    "input": "over 1 maand",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-09-14T00:00:00+02:00",
+    "expected_end": "2026-09-14T23:59:59+02:00",
+    "granularity": "day",
+    "min_confidence": 0.90
+  },
+  {
+    "input": "over 6 maanden",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2027-02-14T00:00:00+01:00",
+    "expected_end": "2027-02-14T23:59:59+01:00",
+    "granularity": "day",
+    "min_confidence": 0.90
+  },
+  {
+    "input": "in januari",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2027-01-01T00:00:00+01:00",
+    "expected_end": "2027-01-31T23:59:59+01:00",
+    "granularity": "month",
+    "min_confidence": 0.90
+  },
+  {
+    "input": "in september",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-09-01T00:00:00+02:00",
+    "expected_end": "2026-09-30T23:59:59+02:00",
+    "granularity": "month",
+    "min_confidence": 0.90
+  },
+  {
+    "input": "eerste weekend van september",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-09-05T00:00:00+02:00",
+    "expected_end": "2026-09-06T23:59:59+02:00",
+    "granularity": "weekend",
+    "min_confidence": 0.90
+  },
+  {
+    "input": "laatste weekend van augustus",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-08-29T00:00:00+02:00",
+    "expected_end": "2026-08-30T23:59:59+02:00",
+    "granularity": "weekend",
+    "min_confidence": 0.90
+  },
+  {
+    "input": "komende zomer",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2027-06-21T00:00:00+02:00",
+    "expected_end": "2027-09-22T23:59:59+02:00",
+    "granularity": "season",
+    "min_confidence": 0.85
+  },
+  {
+    "input": "komende winter",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-12-21T00:00:00+01:00",
+    "expected_end": "2027-03-20T23:59:59+01:00",
+    "granularity": "season",
+    "min_confidence": 0.85
+  },
+  {
+    "input": "tomorrow morning",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-08-15T06:00:00+02:00",
+    "expected_end": "2026-08-15T12:00:00+02:00",
+    "granularity": "daypart",
+    "min_confidence": 0.95
+  },
+  {
+    "input": "tomorrow afternoon",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-08-15T12:00:00+02:00",
+    "expected_end": "2026-08-15T18:00:00+02:00",
+    "granularity": "daypart",
+    "min_confidence": 0.95
+  },
+  {
+    "input": "tomorrow evening",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-08-15T18:00:00+02:00",
+    "expected_end": "2026-08-15T23:00:00+02:00",
+    "granularity": "daypart",
+    "min_confidence": 0.95
+  },
+  {
+    "input": "next week friday",
+    "ref": "2026-08-12T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-08-21T00:00:00+02:00",
+    "expected_end": "2026-08-21T23:59:59+02:00",
+    "granularity": "day",
+    "min_confidence": 0.85
+  },
+  {
+    "input": "this weekend",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-08-15T00:00:00+02:00",
+    "expected_end": "2026-08-16T23:59:59+02:00",
+    "granularity": "weekend",
+    "min_confidence": 0.95
+  },
+  {
+    "input": "in 3 days",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2026-08-17T00:00:00+02:00",
+    "expected_end": "2026-08-17T23:59:59+02:00",
+    "granularity": "day",
+    "min_confidence": 0.95
+  },
+  {
+    "input": "in 6 months",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2027-02-14T00:00:00+01:00",
+    "expected_end": "2027-02-14T23:59:59+01:00",
+    "granularity": "day",
+    "min_confidence": 0.90
+  },
+  {
+    "input": "in january",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Europe/Amsterdam",
+    "expected_start": "2027-01-01T00:00:00+01:00",
+    "expected_end": "2027-01-31T23:59:59+01:00",
+    "granularity": "month",
+    "min_confidence": 0.90
+  },
+  {
+    "input": "morgenochtend op Bali",
+    "ref": "2026-08-14T09:12:00+02:00",
+    "tz": "Asia/Makassar",
+    "expected_start": "2026-08-15T06:00:00+08:00",
+    "expected_end": "2026-08-15T12:00:00+08:00",
+    "granularity": "daypart",
+    "min_confidence": 0.95
+  }
+]

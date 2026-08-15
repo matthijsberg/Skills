@@ -1,0 +1,45 @@
+default_timezone: "Europe/Amsterdam"
+confidence_threshold: 0.80
+
+dayparts:
+  ochtend:
+    start_hour: 6
+    end_hour: 12
+    synonyms: ["ochtend", "morgen", "morning", "am"]
+  middag:
+    start_hour: 12
+    end_hour: 18
+    synonyms: ["middag", "afternoon", "namiddag", "pm"]
+  avond:
+    start_hour: 18
+    end_hour: 23
+    synonyms: ["avond", "evening", "nightfall"]
+  nacht:
+    start_hour: 23
+    end_hour: 6
+    synonyms: ["nacht", "night", "'s nachts"]
+
+horizon_boundaries:
+  micro_max_hours: 36
+  meso_max_days: 7
+  macro_max_days: 30
+
+ntp_servers:
+  - "time.cloudflare.com"
+  - "time.google.com"
+  - "pool.ntp.org"
+  - "time.apple.com"
+
+http_time_urls:
+  - "https://www.google.com"
+  - "https://www.cloudflare.com"
+  - "https://www.nist.gov"
+
+cache:
+  enabled: true
+  file_path: "/tmp/zeitgeist_cache.json"
+  ttl_seconds:
+    hourly: 900       # 15 minutes
+    daily: 3600       # 60 minutes
+    geocoding: 0      # 0 = infinite (permanent)
+    climate: 0        # 0 = infinite (permanent)

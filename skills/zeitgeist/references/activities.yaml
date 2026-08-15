@@ -1,0 +1,27 @@
+activities:
+  ferry:
+    synonyms: ["ferry", "boot", "overtocht", "varen", "boottocht", "boat"]
+    duration_hours: 1
+    granularity: "hour"
+    special_factors: ["wind_bft", "wind_gusts_kmh", "precip_prob", "visibility"]
+  crossfit:
+    synonyms: ["crossfit", "wod", "training", "hardlopen", "gym", "sporten", "workout"]
+    duration_hours: 1
+    granularity: "hour"
+    special_factors: ["temp_c", "feels_like_c", "precip_prob", "humidity"]
+  dagtocht:
+    synonyms: ["dagtocht", "tour", "plantagetour", "excursie", "wandeling", "hike", "sightseeing"]
+    default_daypart: "middag"
+    duration_hours: 5
+    granularity: "daypart"
+    special_factors: ["uv_index", "heat_index", "precip_prob", "temp_max"]
+  wintersport:
+    synonyms: ["skieën", "skiën", "snowboarden", "wintersport", "ski"]
+    duration_days: 7
+    granularity: "season"
+    special_factors: ["snowfall_probability", "freezing_level", "snow_depth"]
+  strand:
+    synonyms: ["strand", "beach", "zonvakantie", "zwemmen"]
+    duration_days: 7
+    granularity: "season"
+    special_factors: ["water_temp", "sunshine_hours", "uv_index"]
