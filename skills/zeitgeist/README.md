@@ -42,6 +42,42 @@ It eliminates the foundational time-handling failures of LLMs:
 
 ---
 
+## 🌐 Universal Multi-Domain Use Cases
+
+While weather is a prominent example of horizon-based degradation (hourly vs. climate averages), **time grounds almost every autonomous agent task**. Zeitgeist provides the universal temporal backbone across 6 key domains:
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    ZEITGEIST UNIVERSAL DOMAINS                          │
+├──────────────────────┬──────────────────────────────────────────────────┤
+│ 🚆 Public Transport  │ Train departures ("next Friday 06:59"), holiday  │
+│    & Commutes        │ schedules (Sunday vs. weekday timetable changes) │
+├──────────────────────┼──────────────────────────────────────────────────┤
+│ ⚡ Dynamic Energy    │ EPEX hourly day-ahead power prices, heat pump    │
+│    & Smart Grids     │ buffer heating during solar hours vs. winter     │
+├──────────────────────┼──────────────────────────────────────────────────┤
+│ 🏋️ Habits, Sports   │ CrossFit WOD schedules ("every Wednesday 08:30"),│
+│    & Routines        │ daylight-safe outdoor training, rest days        │
+├──────────────────────┼──────────────────────────────────────────────────┤
+│ 🏡 Smart Home        │ Solar-anchored triggers: sunset lighting, quiet  │
+│    & Automations     │ hours (22:00–08:00), holiday heating profiles    │
+├──────────────────────┼──────────────────────────────────────────────────┤
+│ 📊 Business, Finance │ Fiscal quarters (Q1–Q4), ISO-week sprint planning│
+│    & Deadlines       │ market open/close, month-end reconciliations     │
+├──────────────────────┼──────────────────────────────────────────────────┤
+│ 🌤️ Weather & Clima  │ Micro hourly forecasts, Meso weekly trends, and  │
+│                      │ historical climate averages (skiing / holidays)  │
+└──────────────────────┴──────────────────────────────────────────────────┘
+```
+
+### Domain Examples in Action:
+- **Energy / Heat Pump:** *"Should I charge the battery tomorrow afternoon?"* ➔ Zeitgeist resolves `start: 12:00, end: 18:00` in the user's timezone and supplies the exact solar generation window.
+- **Commute / Public Transit:** *"Will the 06:59 train run on King's Day?"* ➔ Zeitgeist detects `holiday: Koningsdag (NL)` on April 27 and warns that Sunday timetables apply.
+- **CrossFit / Gym:** *"Plan my workouts for next week"* ➔ Expands recurring intervals (`Wed/Fri 08:30`, `Sun 09:30`) into exact ISO dates.
+- **Photography & Travel:** *"When is the best light at Ubud temple tomorrow?"* ➔ Anchors to `golden_hour_start` (`17:33 WITA`).
+
+---
+
 ## 🚀 Quickstart & Demo
 
 ### 1. Installation

@@ -44,6 +44,16 @@ It solves the core failure mode of LLMs around time: static "now" strings, broke
 6. **Solar Event-Anchored Relative Time:**
    - Automatically anchors queries like *"tijdens zonsondergang"*, *"tijdens golden hour"*, *"voor het donker"*, *"bij zonsopgang"* to the exact astronomical event window for any location on Earth.
 
+## 🌐 Universal Domain Applications
+
+Zeitgeist grounds any temporal query across 6 core domains:
+- 🚆 **Public Transit & Commutes:** Holiday schedules, weekday vs. weekend train tables (`06:59` commute).
+- ⚡ **Energy & Smart Grid:** Day-ahead hourly EPEX electricity pricing, solar battery charging, heat pump heating buffers.
+- 🏋️ **Fitness & Routines:** Recurring CrossFit schedules (`Wed/Fri 08:30`, `Sun 09:30`), daylight-safe outdoor training.
+- 🏡 **Smart Home & Automations:** Solar lighting (`sunset`), quiet hours (`22:00–08:00`), vacation heating setpoints.
+- 📊 **Business & Planning:** Fiscal quarters, ISO-week sprint planning, market trading hours, deadlines.
+- 🌤️ **Weather & Climatology:** Hourly micro-forecasts ➔ weekly meso-trends ➔ long-term climate normals.
+
 ---
 
 ## 🛠️ CLI & Library Usage
