@@ -8,7 +8,8 @@ A curated monorepo of production-grade, highly tested skills, extensions, and au
 
 | Skill | Category | Version | Status | Description |
 |---|---|---|---|---|
-| **[`zeitgeist`](skills/zeitgeist/)** | `time` / `grounding` | `v1.2.0` | 🟢 Production | Dynamic temporal awareness, Stratum-1 atomic clock sync, deterministic NL/EN normalizer, 4-tier horizon matrix, holiday calendar & solar event calculator. |
+| **[`zeitgeist`](skills/zeitgeist/)** | `time` / `grounding` | `v1.2.1` | 🟢 Production | Dynamic temporal awareness, Stratum-1 atomic clock sync, deterministic NL/EN normalizer, 4-tier horizon matrix, holiday calendar & solar event calculator. |
+| **[`homeassistant-addon-development`](skills/homeassistant-addon-development/)** | `devops` / `homeassistant` | `v2.0.0` | 🟢 Production | Build, upgrade, configure, and debug Home Assistant Add-ons (HA Apps), Supervisor API/SSH lifecycle, Ingress, S6-overlay, and security/CI gates. |
 
 ---
 

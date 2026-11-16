@@ -61,22 +61,22 @@ Zeitgeist grounds any temporal query across 6 core domains:
 ### 1. All-in-One Query (Recommended)
 Run the complete pipeline (Normalizer ➔ Timezone ➔ Horizon ➔ Solar ➔ Weather):
 ```bash
-python3 /config/.hermes/profiles/matthijs/skills/time/zeitgeist/scripts/zeitgeist.py query "morgen om 10:00 ferry naar Gili" --loc "Gili Trawangan" --json
+python3 ~/.hermes/skills/time/zeitgeist/scripts/zeitgeist.py query "morgen om 10:00 ferry naar Gili" --loc "Gili Trawangan" --json
 ```
 
 ### 2. Live Atomic Time Context (Pre-Turn Grounding)
 ```bash
-python3 /config/.hermes/profiles/matthijs/skills/time/zeitgeist/scripts/zeitgeist.py now --loc "Bali" --json
+python3 ~/.hermes/skills/time/zeitgeist/scripts/zeitgeist.py now --loc "Bali" --json
 ```
 
 ### 3. Relative Phrase Normalization
 ```bash
-python3 /config/.hermes/profiles/matthijs/skills/time/zeitgeist/scripts/zeitgeist.py normalize "overmorgenochtend" --tz "Europe/Amsterdam" --json
+python3 ~/.hermes/skills/time/zeitgeist/scripts/zeitgeist.py normalize "overmorgenochtend" --tz "Europe/Amsterdam" --json
 ```
 
 ### 4. Solar Daylight & Golden Hour
 ```bash
-python3 /config/.hermes/profiles/matthijs/skills/time/zeitgeist/scripts/zeitgeist.py solar "2026-08-15" --loc "Amsterdam" --json
+python3 ~/.hermes/skills/time/zeitgeist/scripts/zeitgeist.py solar "2026-08-15" --loc "Amsterdam" --json
 ```
 
 ---
